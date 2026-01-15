@@ -11,18 +11,30 @@ function Dashboard({ categories, expenses, settings }) {
             </div>
 
             {/* Main Summary Card */}
-            <div className="card summary-card">
-                <div className="label">Total Cashback Earned</div>
-                <div className="amount">{formatCurrency(summary.totalCashback, settings.currency)}</div>
-
-                <div className="summary-stats">
-                    <div className="stat-item">
-                        <div className="stat-value">{formatCurrency(summary.totalSpent, settings.currency)}</div>
+            <div className="card summary-card" style={{ padding: '24px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                    <div className="stat-item" style={{ textAlign: 'left' }}>
                         <div className="stat-label">Total Spent</div>
+                        <div className="stat-value" style={{ fontSize: '1.5rem' }}>{formatCurrency(summary.totalSpent, settings.currency)}</div>
+                    </div>
+                    <div className="stat-item" style={{ textAlign: 'right' }}>
+                        <div className="stat-label">Actual Earned</div>
+                        <div className="stat-value" style={{ fontSize: '1.5rem', color: 'rgba(255,255,255,0.95)' }}>{formatCurrency(summary.totalCashback, settings.currency)}</div>
+                    </div>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
+                    <div className="stat-item">
+                        <div className="stat-label">Total Potential</div>
+                        <div className="stat-value" style={{ fontSize: '1.1rem' }}>{formatCurrency(summary.totalPotentialCashback, settings.currency)}</div>
                     </div>
                     <div className="stat-item">
-                        <div className="stat-value">{formatCurrency(summary.lostToCapping, settings.currency)}</div>
-                        <div className="stat-label">Lost to Limits</div>
+                        <div className="stat-label">Amount Lost</div>
+                        <div className="stat-value" style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.9)' }}>{formatCurrency(summary.lostToCapping, settings.currency)}</div>
+                    </div>
+                    <div className="stat-item">
+                        <div className="stat-label">Txns</div>
+                        <div className="stat-value" style={{ fontSize: '1.1rem' }}>{summary.categoryStats.reduce((acc, cat) => acc + cat.expenseCount, 0)}</div>
                     </div>
                 </div>
             </div>
